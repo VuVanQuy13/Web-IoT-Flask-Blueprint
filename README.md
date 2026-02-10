@@ -118,4 +118,5 @@ Mặc định chạy tại:
 
 <img width="1916" height="915" alt="Screenshot 2025-11-19 175821" src="https://github.com/user-attachments/assets/ca6e3780-5478-43cc-b0ee-0d3f65b5da75" />
 
-
+### 6. Tắt ứng dụng:
+deactivate
