@@ -59,7 +59,7 @@ cd Web-IoT-Flask-Blueprint
 * Windows:
 
 ```bash
-\Web_env\Scripts\activate
+.\Web_env\Scripts\activate
 ```
 
 ### 3. Install Dependencies
