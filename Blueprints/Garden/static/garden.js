@@ -1,4 +1,4 @@
-const API_farm = "http://192.168.1.6:2004/board/";
+const API_farm = "http://127.0.0.1:2004/garden";
 
 
 const btnAdd = document.getElementById('btnAdd') 
@@ -59,14 +59,26 @@ document.addEventListener("DOMContentLoaded" , () => {
         const id = tr.dataset.id
 
         // DELETE farm
-        if(e.target.classList.contains('btn-delete')) {
-            if (!confirm('Bạn có chắc muốn xóa form này?')) return
+        if (e.target.classList.contains('btn-delete')) {
+            if (!confirm('Bạn có chắc muốn xóa farm này?')) return;
 
             try {
-                await fetch( API_farm + `/api/delete/${id}` , {method: "DELETE"})
-                tr.remove()
-            } catch(err) {
-                alert("Lỗi khi xóa farm" + err.message)
+                const res = await fetch(API_farm + `/api/delete/${id}`, { method: "DELETE" });
+                
+                if (res.ok) {
+                    // LOGIC SỬA ĐỔI Ở ĐÂY:
+                    // Tìm hàng "Sửa" (edit-row) nằm ngay sau hàng hiện tại (nếu đang mở)
+                    const nextRow = tr.nextElementSibling;
+                    if (nextRow && nextRow.classList.contains('edit-row')) {
+                        nextRow.remove(); // Xóa form sửa đang mở
+                    }
+
+                    tr.remove(); // Xóa hàng dữ liệu chính
+                } else {
+                    alert("Không thể xóa trên server.");
+                }
+            } catch (err) {
+                alert("Lỗi khi xóa farm: " + err.message);
             }
         }
 
@@ -124,12 +136,10 @@ document.addEventListener("DOMContentLoaded" , () => {
             })
         }
 
-        // SELECT farm
+        // SELECT farm :
         else if(e.target.classList.contains('btn-select')) {
-            window.location.href = `/farm/${id}`
+            // Chuyển hướng sang route của blueprint mushroom
+            window.location.href = `/mushroom/${id}`;
         }
-
-
-
     })
 })

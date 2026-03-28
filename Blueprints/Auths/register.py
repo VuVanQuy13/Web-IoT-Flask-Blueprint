@@ -4,7 +4,7 @@ import os
 
 register_bp = Blueprint('register' , __name__ , template_folder='auth_templates' , url_prefix='/register')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.join(BASE_DIR , '..' , '..' , 'database.db')
+DB_PATH = os.path.join(BASE_DIR , '..' , '..' , 'Farm_Database.db')
 
 
 def get_db_connection():

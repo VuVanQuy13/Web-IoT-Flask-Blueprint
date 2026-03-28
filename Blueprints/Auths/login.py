@@ -4,8 +4,8 @@ import os
 
 login_bp = Blueprint('login' , __name__ , template_folder='auth_templates' , static_folder='static' , url_prefix='/login')
     
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))               # Lấy địa chỉ file này
-DB_PATH = os.path.join(BASE_DIR, '..', '..', 'database.db')            # Lấy thư mục chứa file login.py nghĩa là .../Blueprints
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))                   # Lấy địa chỉ file này
+DB_PATH = os.path.join(BASE_DIR, '..', '..', 'Farm_Database.db')             # Lấy thư mục chứa file login.py nghĩa là .../Blueprints
 
 
 def get_db_connection():
@@ -16,7 +16,7 @@ def get_db_connection():
 @login_bp.route('/' , methods=["GET" , "POST"])
 def login():
     if session.get('account'):
-        return redirect(url_for('board.board'))
+        return redirect(url_for('garden.garden'))
 
 
     if request.method == "GET":
@@ -38,7 +38,7 @@ def login():
 
         if user:
             session['account'] = 'thanhcong'
-            return redirect(url_for('board.board'))
+            return redirect(url_for('garden.garden'))
         else:
             error = "Tên đăng nhập hoặc mật khẩu không đúng"
     
